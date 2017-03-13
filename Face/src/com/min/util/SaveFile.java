@@ -31,7 +31,7 @@ public class SaveFile {
 			// 解析请求之前，要判断是否文件上传类型
 			boolean isMult = ServletFileUpload.isMultipartContent(request);
 			// 创建件文件夹
-			String path = request.getRealPath("upload/");
+			String path = request.getSession().getServletContext().getRealPath("upload/");
 			File file = new File(path);
 			if (!file.exists()) {
 				file.mkdir();
@@ -45,9 +45,9 @@ public class SaveFile {
 				while (it.hasNext()) {
 					FileItem fileItem = (FileItem) it.next();
 					if (!fileItem.isFormField()) {
-						 File severs = new File(path,fileItem.getName()); //文件名，和文件路径
-						 fileItem.write(severs);// 上传操作
-						 imgName=fileItem.getName();
+						 File filePath = new File(path,fileItem.getName()); //文件名，和文件路径
+						 fileItem.write(filePath);// 上传操作
+						 imgName="upload"+File.separatorChar+filePath.getName();
 					}
 				}
 			}

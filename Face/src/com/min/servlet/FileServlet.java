@@ -38,8 +38,8 @@ public class FileServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String name = SaveFile.save(request, response);
-		request.getSession().setAttribute("fileName","upload/"+name);
+		String imgName = SaveFile.save(request, response);
+		request.getSession().setAttribute("imgName",imgName);
 		response.sendRedirect(request.getContextPath()+"/index.jsp");
 	}
 

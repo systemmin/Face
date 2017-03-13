@@ -32,10 +32,11 @@ public class FaceServlet extends HttpServlet {
 	}
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// 从页面获取图片名称
 		String path =request.getParameter("path");
 		response.setContentType("application/json");
-		// 这里路径换成自己的真实路径D:/webjsp/apache-tomcat-6.0.48/webapps就是Tomcat/webapps的位置
-		String str = FaceFile.save("D:/webjsp/apache-tomcat-6.0.48/webapps/Face/"+path);
+		// 获取图片的绝对路径request.getSession().getServletContext().getRealPath(path)
+		String str = FaceFile.save(request.getSession().getServletContext().getRealPath(path));
 		PrintWriter out = response.getWriter();
 		out.write(str);
 		out.flush();

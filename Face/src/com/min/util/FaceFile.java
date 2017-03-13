@@ -32,9 +32,12 @@ public class FaceFile {
 			output = new ByteArrayOutputStream();
 			byte[] buf = new byte[4000];
 			int numBytesRead = 0;
+			// 从流中读取至多 buf.length 个字节，并将其存储到 buf 中（从 off 索引处开始）。
 			while ((numBytesRead = input.read(buf)) != -1) {
+				// 写入len个字节指定字节数组中的起始偏移了这个字节数组输出流。
 				output.write(buf, 0, numBytesRead);
 			}
+			// 创建新分配的字节数组。其大小是此输出流的当前大小，缓冲区的有效内容已复制到它。
 			bys = output.toByteArray();
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
@@ -58,6 +61,7 @@ public class FaceFile {
 		 *response.getStatus()返回状态码，状态这里可以查到
 		 *https://console.faceplusplus.com.cn/documents/5672651
 		 *response.getContent()返回参数，是字节数组，转成String输出JSON串
+		 *返回的json串中包含gender,age,smiling,glass,headpose,blur
 		 */
 		CommonOperate iOperate = new CommonOperate(
 				"PDr8aqmZFWMvkFFtUNx_PFrbwi-j_Etx",
